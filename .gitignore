@@ -7,3 +7,4 @@ bin/*
 .arduino15/inventory.yaml
 .arduino15/package_index.json
 .arduino15/tmp/*
+.vscode/
