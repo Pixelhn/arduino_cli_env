@@ -10,7 +10,8 @@ void setup()
 
 void loop()
 {
-	digitalWrite(4, 0);
+	Serial.println("loop");
+	digitalWrite(4, 0); 
 	delay(1000);
 	digitalWrite(4, 1);
 	delay(1000);
