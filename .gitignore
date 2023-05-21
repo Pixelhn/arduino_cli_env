@@ -6,3 +6,4 @@ bin/*
 .arduino15/package_index.json.sig
 .arduino15/inventory.yaml
 .arduino15/package_index.json
+.arduino15/tmp/*
