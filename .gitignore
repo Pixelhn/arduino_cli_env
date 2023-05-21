@@ -1,10 +1,4 @@
 cache/*
-.arduino15/packages/*
 bin/*
-.arduino15/library_index.json
-.arduino15/library_index.json.sig
-.arduino15/package_index.json.sig
-.arduino15/inventory.yaml
-.arduino15/package_index.json
-.arduino15/tmp/*
+.arduino15/*
 .vscode/

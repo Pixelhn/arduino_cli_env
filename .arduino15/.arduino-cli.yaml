@@ -6,9 +6,9 @@ build_cache:
 daemon:
   port: "50051"
 directories:
-  data: /home/rock/arduino_cli_env/.arduino15
-  downloads: /home/rock/arduino_cli_env/cache
-  user: /home/rock/arduino_cli_env/lib
+  data: PWD/.arduino15
+  downloads: PWD/cache
+  user: PWD/lib
 library:
   enable_unsafe_install: false
 logging:
