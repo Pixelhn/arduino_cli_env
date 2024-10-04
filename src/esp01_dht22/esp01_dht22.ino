@@ -18,6 +18,8 @@
 DHT dht(DHT_PIN, DHT_TYPE);
 
 int mqtt_status_g = 0;
+int force_falg = 0;
+
 AsyncMqttClient mqttClient;
 Ticker mqttReconnectTimer;
 
@@ -64,6 +66,8 @@ void onMqttConnect(bool sessionPresent)
   uint16_t packetIdPub2 = mqttClient.publish("test/lol", 2, true, "test 3");
   Serial.print("Publishing at QoS 2, packetId: ");
   Serial.println(packetIdPub2);
+
+  force_falg = 1;
 }
 
 void onWifiDisconnect(const WiFiEventStationModeDisconnected& event)
@@ -170,19 +174,30 @@ void loop()
 {
     float temp;
     float hum;
+    float tmp;
     char buf[32];
     
     if (mqtt_status_g)
     {
-        hum = dht.readHumidity();
-        temp = dht.readTemperature();
+        tmp = dht.readHumidity();
+        if (hum != tmp || force_falg)
+        {
+          hum = tmp;
+          mqttClient.publish("dht/hum", 0, true, String(hum).c_str());
+        }
 
-        mqttClient.publish("dht/tem", 0, true, String(temp).c_str());
-        mqttClient.publish("dht/hum", 0, true, String(hum).c_str());
+        tmp = dht.readTemperature();
+        if (temp != tmp || force_falg)
+        {
+          temp = tmp;
+          mqttClient.publish("dht/tem", 0, true, String(temp).c_str());
+
+        }
 
         Serial.printf("tem: %.2f \r\n", temp);
         Serial.printf("hum: %.2f \r\n", hum);
         delay(5000);
+        force_falg = 0;
     }
     else
     {
